@@ -25,6 +25,7 @@ try {
     $router->get('/result', '\App\Controllers\ExamController@result');
 
     $router->get('/examinees', '\App\Controllers\ExamineesController@index');
+    $router->get('/exam-attempts/{exam_attempt_id}', '\App\Controllers\ExamineesController@exportToPDF');
 
     // Run it!
     $router->run();

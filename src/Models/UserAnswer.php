@@ -76,4 +76,37 @@ class UserAnswer extends BaseModel
         return $result;
     }
 
+    public function exportData($attempt_id) {
+        $sql = "
+            SELECT 
+                ua.answer_id,
+                ua.attempt_id,
+                ua.answers,
+                ua.date_answered,
+                ea.attempt_datetime AS attempt_date,
+                u.complete_name AS examinee_name,
+                u.email AS examinee_email,  -- added examinee email field
+                ea.exam_items,
+                ea.exam_score
+            FROM 
+                users_answers AS ua
+            JOIN 
+                users AS u ON ua.user_id = u.id
+            JOIN 
+                exam_attempts AS ea ON ua.attempt_id = ea.attempt_id
+            WHERE 
+                ea.attempt_id = :attempt_id
+            ORDER BY 
+                ua.date_answered DESC"; 
+
+        $stmt = $this->db->prepare($sql);
+        
+        $stmt->bindParam(':attempt_id', $attempt_id, PDO::PARAM_INT);
+        
+        $stmt->execute();
+        
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }
