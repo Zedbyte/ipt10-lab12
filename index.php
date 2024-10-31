@@ -19,6 +19,7 @@ try {
 
     $router->get('/login', '\App\Controllers\LoginController@loginForm');
     $router->post('/login', '\App\Controllers\LoginController@login');
+    $router->get('/logout', '\App\Controllers\LoginController@logout');
 
     $router->get('/exam', '\App\Controllers\ExamController@exam');
     $router->post('/exam', '\App\Controllers\ExamController@exam');

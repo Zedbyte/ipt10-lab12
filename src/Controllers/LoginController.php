@@ -43,15 +43,16 @@ class LoginController extends BaseController
         }
     }
 
-    private function isPasswordValid($inputPassword, $storedHash) {
-        return password_verify($inputPassword, $storedHash);
-    }
-
     private function onSuccessfulLogin($email) {
         // Reset attempts and store session data
         $_SESSION['login_attempts'] = 0;
         $_SESSION['is_logged_in'] = true;
         $_SESSION['email'] = $email;
+
+        if (!isset($_SESSION['user_id'])) {
+            $obj = new User();
+            $_SESSION['user_id'] = $obj->getUserID($email);
+        }
 
         // Redirect after successful login
         header("Location: /exam");
@@ -84,7 +85,7 @@ class LoginController extends BaseController
     public function logout() {
         $this->initializeSession();
         session_destroy();
-        header("Location: /login-form");
+        header("Location: /");
         exit;
     }
 

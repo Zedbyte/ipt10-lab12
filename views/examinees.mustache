@@ -20,20 +20,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Examinee Name</td>
-                        <td>{{examinee_name}}</td>
-                    </tr>
-                    <tr>
-                        <td>Attempt ID</td>
-                        <td>{{attempt_id}}</td>
-                    </tr>
-                    <tr>
-                        <td>Date Answered</td>
-                        <td>{{date_answered}}</td>
-                    </tr>
-                    <tr>
                         <td>Attempt Date</td>
                         <td>{{attempt_date}}</td>
+                    </tr>
+                    <tr>
+                        <td>Examinee Name</td>
+                        <td>{{examinee_name}}</td>
                     </tr>
                     <tr>
                         <td>Exam Items</td>
@@ -44,14 +36,6 @@
                         <td class="score">{{exam_score}}</td>
                     </tr>
                     <tr>
-                        <td>Answers</td>
-                        <td>
-                            <ul>
-                                {{#answers}}
-                                    <li>{{.}}</li>
-                                {{/answers}}
-                            </ul>
-                        </td>
                     </tr>
                     <tr>
                         <td>Export</td>
@@ -65,6 +49,7 @@
             </table>
         </article>
         {{/data}}
+        <a href="/logout"><button>Logout</button></a>
     </main>
 </body>
 </html>

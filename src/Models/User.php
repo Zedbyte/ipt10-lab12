@@ -24,6 +24,15 @@ class User extends BaseModel
         return $this->db->lastInsertId();
     }
 
+    public function getUserID($email) {
+        $sql = "SELECT id FROM users WHERE email = :email";
+        $statement = $this->db->prepare($sql);
+        $statement->execute(['email' => $email]);
+    
+        return $statement->fetchColumn();
+    }
+
+
     protected function hashPassword($password)
     {
         return password_hash($password, PASSWORD_DEFAULT);
